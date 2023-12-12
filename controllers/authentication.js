@@ -16,12 +16,8 @@ const handleUserLogin = async (req, res) => {
   } else {
     const { email, password } = req.body;
 
-    // console.log(`Email : ${email} and Password : ${password}`);
-    // console.log(`Email : ${typeof email} and Password : ${typeof password}`);
-
     try {
       const token = await User.matchPasswordAndGenerateToken(email, password);
-      // console.log(token);
       return res.status(200).json({ token, msg: "success" });
     } catch (error) {
       console.log(error);

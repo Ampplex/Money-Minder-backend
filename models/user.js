@@ -20,6 +20,11 @@ const userSchema = new mongoose.Schema(
     salt: {
       type: String,
     },
+    expense: {
+      amount: Number,
+      category: String,
+      time: Date,
+    },
   },
   { timestamps: true }
 );
