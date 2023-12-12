@@ -5,6 +5,7 @@ const secretKey = "cK£2F$V+Xv`Mc8__R8H%3245'xE8}2|}UcH5MOD0#$#%fgh;*/*-fdv";
 function createTokenForUser(user) {
   const payload = {
     _id: user._id,
+    name: user.name,
     email: user.email,
     password: user.password,
   };

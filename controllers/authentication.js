@@ -21,7 +21,7 @@ const handleUserLogin = async (req, res) => {
 
     try {
       const token = await User.matchPasswordAndGenerateToken(email, password);
-      console.log(token);
+      // console.log(token);
       return res.status(200).json({ token, msg: "success" });
     } catch (error) {
       console.log(error);
@@ -43,7 +43,7 @@ const handleUserSignUp = async (req, res) => {
     password: body.password,
   });
 
-  console.log(result);
+  // console.log(result);
 
   return res
     .status(201)
