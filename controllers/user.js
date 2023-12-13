@@ -3,7 +3,6 @@ const User = require("../models/user");
 const handleAddExpense = async (req, res) => {
   const body = req.body;
   const userId = body.userId;
-  console.log(body);
 
   const expenseData = {
     amount: body.amount,
@@ -11,15 +10,26 @@ const handleAddExpense = async (req, res) => {
     time: new Date(),
   };
 
-  User.updateOne({ _id: userId }, { $set: { expense: expenseData } })
-    .then((result) => {
-      console.log("Document updated successfully:", result);
-    })
-    .catch((error) => {
-      console.error("Error updating document:", error);
-    });
+  try {
+    const result = await User.findOneAndUpdate(
+      { _id: userId },
+      { $push: { expense: expenseData } },
+      { new: true }
+    );
 
-  return res.status(201).json({ msg: "success" });
+    if (result) {
+      console.log("Document updated successfully:", result);
+      return res.status(201).json({ msg: "success" });
+    } else {
+      console.error("User not found");
+      return res.status(404).json({ msg: "error", reason: "User not found" });
+    }
+  } catch (error) {
+    console.error("Error updating document:", error);
+    return res
+      .status(500)
+      .json({ msg: "error", reason: "Internal Server Error" });
+  }
 };
 
 module.exports = {

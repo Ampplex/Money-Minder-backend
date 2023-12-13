@@ -21,9 +21,8 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
     expense: {
-      amount: Number,
-      category: String,
-      time: Date,
+      type: Array,
+      default: [],
     },
   },
   { timestamps: true }
