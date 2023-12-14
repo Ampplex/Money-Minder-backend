@@ -2,6 +2,29 @@ const { createHmac, randomBytes } = require("crypto");
 const mongoose = require("mongoose");
 const { createTokenForUser } = require("../services/auth");
 
+const expenseSchema = new mongoose.Schema({
+  category: {
+    type: String,
+    required: true,
+  },
+  totalAmount: {
+    type: Number,
+    default: 0,
+  },
+  data: [
+    {
+      amount: {
+        type: Number,
+        required: true,
+      },
+      time: {
+        type: Date,
+        required: true,
+      },
+    },
+  ],
+});
+
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -20,10 +43,7 @@ const userSchema = new mongoose.Schema(
     salt: {
       type: String,
     },
-    expense: {
-      type: Array,
-      default: [],
-    },
+    expense: [expenseSchema],
   },
   { timestamps: true }
 );
@@ -66,6 +86,6 @@ userSchema.static(
   }
 );
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
