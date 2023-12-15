@@ -173,9 +173,7 @@ const groupDataByMonth = (data) => {
 
   data.forEach((item) => {
     const date = new Date(item.time);
-    const yearMonth = `${date.getFullYear()}-${String(
-      date.getMonth() + 1
-    ).padStart(2, "0")}`;
+    const yearMonth = `${String(date.getMonth() + 1).padStart(2, "0")}`;
 
     // Check if the result object already contains an entry for the current month
     if (result[yearMonth]) {
