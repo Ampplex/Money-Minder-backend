@@ -147,6 +147,33 @@ const handleCategoryExpense = async (req, res) => {
   }
 };
 
+const handleCategoryExpenseForAI = async (req, res) => {
+  const { id, category } = req.params;
+
+  try {
+    const userWithCategory = await User.findOne({
+      _id: id,
+      "expense.category": category,
+    });
+
+    console.log(userWithCategory);
+
+    if (userWithCategory) {
+      const existingCategory = userWithCategory.expense.find(
+        (e) => e.category === category
+      );
+      return res.status(200).json({ data: existingCategory.data, category });
+    } else {
+      return res.status(404).json({ msg: "error" });
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return res
+      .status(500)
+      .json({ msg: "error", reason: "Internal Server Error" });
+  }
+};
+
 const groupDataByWeek = (data) => {
   const result = {};
 
@@ -272,4 +299,5 @@ module.exports = {
   handleAddExpense,
   handleCategoryExpense,
   handleGetAllExpenses,
+  handleCategoryExpenseForAI,
 };
