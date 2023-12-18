@@ -40,6 +40,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    bio: {
+      type: String,
+    },
+    income: {
+      type: Number,
+    },
+    budget: {
+      type: Number,
+    },
     salt: {
       type: String,
     },

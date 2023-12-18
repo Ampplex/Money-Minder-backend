@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const { connectMongoDb } = require("./connection");
-// const cron = require("node-cron");
+const cron = require("node-cron");
 const moment = require("moment");
 const app = express();
 
@@ -19,25 +19,33 @@ connectMongoDb(process.env.MONGO_URL).then(() => {
 // Middleware - Plugin
 app.use(express.urlencoded({ extended: false }));
 
+const server_Activator = async () => {
+  const url = "https://money-minder-lndt.onrender.com/api/server_activator";
+  const response = await fetch(url);
+  return response.json();
+};
+
+const AI_server_Activator = async () => {
+  const url = "https://money-minder-ai.onrender.com/server_activator";
+  const response = await fetch(url);
+  return response.json();
+};
+
 // Routes
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/server_activator", serverRouter);
 
-// const server_Activator = async () => {
-//   const url = "https://money-minder-lndt.onrender.com/api/server_activator";
-//   const response = await fetch(url);
-//   return response.json();
-// };
-
-// task scheduler
+// job scheduler
 // cron.schedule("* * * * *", async () => {
 //   console.log(
 //     "running the task every minute",
 //     moment().format("DD MMM YYYY hh:mm:ss")
 //   );
 //   const response = await server_Activator();
+//   const AI_Activator_response = await AI_server_Activator();
 //   console.log(response);
+//   console.log(AI_Activator_response);
 // });
 
 app.listen(PORT, () => {

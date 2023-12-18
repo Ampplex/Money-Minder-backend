@@ -295,9 +295,45 @@ const handleGetAllExpenses = async (req, res) => {
   }
 };
 
+const handleGetBio = async (req, res) => {
+  try {
+    const existingUser = await User.findById(req.params.id);
+
+    return res.status(200).json({ Bio: existingUser.bio });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal sever error" });
+  }
+};
+
+const handleGetIncome = async (req, res) => {
+  try {
+    const existingUser = await User.findById(req.params.id);
+
+    return res.status(200).json({ Income: existingUser.income });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal sever error" });
+  }
+};
+
+const handleGetBudget = async (req, res) => {
+  try {
+    const existingUser = await User.findById(req.params.id);
+
+    return res.status(200).json({ Budget: existingUser.budget });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal sever error" });
+  }
+};
+
 module.exports = {
   handleAddExpense,
   handleCategoryExpense,
   handleGetAllExpenses,
   handleCategoryExpenseForAI,
+  handleGetBio,
+  handleGetIncome,
+  handleGetBudget,
 };
