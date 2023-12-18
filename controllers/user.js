@@ -328,6 +328,17 @@ const handleGetBudget = async (req, res) => {
   }
 };
 
+const handleGetName = async (req, res) => {
+  try {
+    const existingUser = await User.findById(req.params.id);
+
+    return res.status(200).json({ Name: existingUser.name });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal sever error" });
+  }
+};
+
 module.exports = {
   handleAddExpense,
   handleCategoryExpense,
@@ -336,4 +347,5 @@ module.exports = {
   handleGetBio,
   handleGetIncome,
   handleGetBudget,
+  handleGetName,
 };

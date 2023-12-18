@@ -7,6 +7,7 @@ const {
   handleGetBio,
   handleGetIncome,
   handleGetBudget,
+  handleGetName,
 } = require("../controllers/user");
 
 const {
@@ -29,5 +30,6 @@ router.get("/getAllExpenses/:id/", handleGetAllExpenses);
 router.get("/getBio/:id/", handleGetBio);
 router.get("/getIncome/:id/", handleGetIncome);
 router.get("/getBudget/:id/", handleGetBudget);
+router.get("/getName/:id/", handleGetName);
 
 module.exports = router;
