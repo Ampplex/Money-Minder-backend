@@ -37,16 +37,16 @@ app.use("/api/auth", authRouter);
 app.use("/api/server_activator", serverRouter);
 
 // job scheduler
-// cron.schedule("* * * * *", async () => {
-//   console.log(
-//     "running the task every minute",
-//     moment().format("DD MMM YYYY hh:mm:ss")
-//   );
-//   const response = await server_Activator();
-//   const AI_Activator_response = await AI_server_Activator();
-//   console.log(response);
-//   console.log(AI_Activator_response);
-// });
+cron.schedule("* * * * *", async () => {
+  console.log(
+    "running the task every minute",
+    moment().format("DD MMM YYYY hh:mm:ss")
+  );
+  const response = await server_Activator();
+  const AI_Activator_response = await AI_server_Activator();
+  console.log(response);
+  console.log(AI_Activator_response);
+});
 
 app.listen(PORT, () => {
   console.log(`Server started at port: ${PORT}`);

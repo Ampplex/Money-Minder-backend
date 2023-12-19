@@ -37,6 +37,9 @@ const handleUserSignUp = async (req, res) => {
     name: body.name,
     email: body.email,
     password: body.password,
+    income: 0,
+    budget: 0,
+    bio: "-",
   });
 
   // console.log(result);

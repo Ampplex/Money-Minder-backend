@@ -320,7 +320,9 @@ const handleGetIncome = async (req, res) => {
 const handleGetBudget = async (req, res) => {
   try {
     const existingUser = await User.findById(req.params.id);
-
+    if (existingUser.budget == "") {
+      existingUser.budget = 0;
+    }
     return res.status(200).json({ Budget: existingUser.budget });
   } catch (error) {
     console.log(error);
